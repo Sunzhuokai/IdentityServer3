@@ -83,10 +83,7 @@ namespace Owin
             app.UseCors();
             app.ConfigureCookieAuthentication(options.AuthenticationOptions.CookieOptions, options.DataProtector);
 
-            if (options.PluginConfiguration != null)
-            {
-                options.PluginConfiguration(app, options);
-            }
+            
 
             if (options.AuthenticationOptions.IdentityProviders != null)
             {
@@ -94,6 +91,11 @@ namespace Owin
             }
 
             app.UseEmbeddedFileServer();
+
+            if (options.PluginConfiguration != null)
+            {
+                options.PluginConfiguration(app, options);
+            }
 
             app.ConfigureHttpLogging(options.LoggingOptions);
 
